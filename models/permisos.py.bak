@@ -1,12 +1,3 @@
-#################################################################################
-# Tabla donde se registran las acciones de controlador
-#################################################################################
-db.define_table('auth_function',
-Field('controlador',requires=IS_NOT_EMPTY()),
-Field('accion',requires=IS_NOT_EMPTY())
-)
-
-
 ################################################################################
 #   Decorador para restringir el acceso a las acciones de controlador a los
 #   usuarios con permisos sobre dichas acciones

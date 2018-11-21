@@ -153,3 +153,8 @@ if configuration.get('scheduler.enabled'):
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+
+db.define_table('auth_function',
+Field('controlador',requires=IS_NOT_EMPTY()),
+Field('accion',requires=IS_NOT_EMPTY())
+)
