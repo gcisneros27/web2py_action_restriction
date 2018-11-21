@@ -1,0 +1,69 @@
+{{extend 'layout.html'}}
+
+<link rel="icon" type="image/x-icon" href="https://github.com/favicon.ico" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+<link rel="stylesheet" href="lib/google-code-prettify/prettify.css" />
+<link rel="stylesheet" href="css/style.css" />
+
+<h1 style="text-align: center;">Asignacion de Permisos</h1>
+
+{{=form}}
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script type="text/javascript" src="{{=URL('static','js/multiselect.min.js')}}"></script>
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-39934286-1', 'github.com');
+    ga('send', 'pageview');
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // make code pretty
+    window.prettyPrint && prettyPrint();
+
+    $("#optgroup").multiselect({
+        search: {
+            left: '<input type="text" name="q" class="form-control" placeholder="Buscar..." />',
+            right: '<input type="text" name="q" class="form-control" placeholder="Buscar..." />',
+        },
+        fireSearch: function(value) {
+            return value.length > 3;
+        }
+    });
+
+    $("#grupo_id").change(function(){
+      var grupo=$( "#grupo_id" ).val();
+      if (grupo==''){
+        $("#optgroup").html('');
+        $("#optgroup_to").html('');
+      }
+      else
+      {
+            $.ajax({
+                  url: "{{=URL('permisos', 'permisos_disponibles')}}",
+                  type:'POST',
+                  data:{grupo:grupo} ,
+                  success: function(result){
+                        $("#optgroup").html(result);
+          }});
+          $.ajax({
+                url: "{{=URL('permisos', 'permisos_asignados')}}",
+                type:'POST',
+                data:{grupo:grupo} ,
+                success: function(result){
+                      $("#optgroup_to").html(result);
+          }});
+      }
+    });
+
+});
+</script>

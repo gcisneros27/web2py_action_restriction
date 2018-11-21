@@ -1,0 +1,131 @@
+timestamp: 2018-11-06T09:39:48.215927
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(128),
+    "last_name" CHAR(128),
+    "email" CHAR(512),
+    "password" CHAR(512),
+    "registration_key" CHAR(512),
+    "reset_password_key" CHAR(512),
+    "registration_id" CHAR(512)
+);
+success!
+timestamp: 2018-11-06T09:39:48.293217
+CREATE TABLE "auth_group"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "role" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2018-11-06T09:39:48.368619
+CREATE TABLE "auth_membership"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-11-06T09:39:48.439141
+CREATE TABLE "auth_permission"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  ,
+    "name" CHAR(512),
+    "table_name" CHAR(512),
+    "record_id" INTEGER
+);
+success!
+timestamp: 2018-11-06T09:39:48.529188
+CREATE TABLE "auth_event"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "time_stamp" TIMESTAMP,
+    "client_ip" CHAR(512),
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "origin" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2018-11-06T09:39:48.596370
+CREATE TABLE "auth_cas"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "created_on" TIMESTAMP,
+    "service" CHAR(512),
+    "ticket" CHAR(512),
+    "renew" CHAR(1)
+);
+success!
+timestamp: 2018-11-06T15:10:15.311785
+CREATE TABLE "permiso"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "controlador" CHAR(512),
+    "accion" CHAR(512)
+);
+success!
+timestamp: 2018-11-07T10:32:48.518692
+CREATE TABLE "auth_function"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "controlador" CHAR(512),
+    "accion" CHAR(512)
+);
+success!
+timestamp: 2018-11-16T10:13:20.074445
+CREATE TABLE "auth_user"(
+    "id" SERIAL PRIMARY KEY,
+    "first_name" VARCHAR(128),
+    "last_name" VARCHAR(128),
+    "email" VARCHAR(512),
+    "password" VARCHAR(512),
+    "registration_key" VARCHAR(512),
+    "reset_password_key" VARCHAR(512),
+    "registration_id" VARCHAR(512)
+);
+success!
+timestamp: 2018-11-16T10:13:20.463409
+CREATE TABLE "auth_group"(
+    "id" SERIAL PRIMARY KEY,
+    "role" VARCHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2018-11-16T10:13:20.546912
+CREATE TABLE "auth_membership"(
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-11-16T10:13:20.630643
+CREATE TABLE "auth_permission"(
+    "id" SERIAL PRIMARY KEY,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  ,
+    "name" VARCHAR(512),
+    "table_name" VARCHAR(512),
+    "record_id" INTEGER
+);
+success!
+timestamp: 2018-11-16T10:13:20.722586
+CREATE TABLE "auth_event"(
+    "id" SERIAL PRIMARY KEY,
+    "time_stamp" TIMESTAMP,
+    "client_ip" VARCHAR(512),
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "origin" VARCHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2018-11-16T10:13:20.806065
+CREATE TABLE "auth_cas"(
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "created_on" TIMESTAMP,
+    "service" VARCHAR(512),
+    "ticket" VARCHAR(512),
+    "renew" CHAR(1)
+);
+success!
+timestamp: 2018-11-16T10:13:20.906109
+CREATE TABLE "auth_function"(
+    "id" SERIAL PRIMARY KEY,
+    "controlador" VARCHAR(512),
+    "accion" VARCHAR(512)
+);
+success!
